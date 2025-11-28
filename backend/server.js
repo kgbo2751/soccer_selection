@@ -15,14 +15,23 @@ mongoose.connect(MONGO_URI)
   .then(() => console.log("MongoDB connected"))
   .catch(err => console.error(err));
 
-// --- API ---
-//app.use('/api', require('./routes/api')); // API 라우트 분리 권장 (지금은 그대로 해도 됨)
+// Player 모델
+const playerSchema = new mongoose.Schema({
+  name: String,
+  team: String,
+  position: String,
+  dominantFoot: String
+});
+const Player = mongoose.model('Player', playerSchema);
 
-// --- React build 제공 ---
-app.use(express.static(path.join(__dirname, 'client/build')));
+// API
+app.get('/api/players', async (req, res) => { ... });
+app.post('/api/players', async (req, res) => { ... });
 
+// React build 제공
+app.use(express.static(path.join(__dirname, '../client/build')));
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
