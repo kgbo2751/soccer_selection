@@ -16,7 +16,7 @@ mongoose.connect(MONGO_URI)
   .catch(err => console.error(err));
 
 // --- API ---
-app.use('/api', require('./routes/api')); // API 라우트 분리 권장 (지금은 그대로 해도 됨)
+//app.use('/api', require('./routes/api')); // API 라우트 분리 권장 (지금은 그대로 해도 됨)
 
 // --- React build 제공 ---
 app.use(express.static(path.join(__dirname, 'client/build')));
